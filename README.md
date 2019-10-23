@@ -4,13 +4,13 @@ Synthea<sup>TM</sup> is a Synthetic Patient Population Simulator. The goal is to
 
 Read [wiki](https://github.com/synthetichealth/synthea/wiki) for more information.
 
-Original [Repo](https://github.com/synthetichealth/synthea/
+Original [Repo](https://github.com/synthetichealth/synthea/)
 
 
 ## Modifications 
 
 This is a fork of synthea, I modified (src/main/java/org/mitre/synthea/export/CSVExporter.java) 
-for generating patient data so that it can be used with [openemr] (https://www.open-emr.org/)
+for generating patient data so that it can be used with [openemr](https://www.open-emr.org/)
 
 ## Quick Start
 
@@ -49,14 +49,15 @@ run_synthea [-s seed] [-p populationSize] [-m moduleFilter] [state [city]]
 
 All Options: 
 
-[-s seed] [-cs clinicianSeed] [-p populationSize]
-[-g gender] [-a minAge-maxAge]
-[-o overflowPopulation]
-[-m moduleFileWildcardList]
-[-c localConfigFilePath]
-[-d localModulesDirPath]
-[--config* value]
- * any setting from src/main/resources/synthea.properties
+- [-s seed] [-cs clinicianSeed] [-p populationSize]
+- [-g gender] [-a minAge-maxAge]
+- [-o overflowPopulation]
+- [-m moduleFileWildcardList]
+- [-c localConfigFilePath]
+- [-d localModulesDirPath]
+- [--config `value`]
+
+  replace `value` with any any setting you want to modify from src/main/resources/synthea.properties
 
 For example:
 
