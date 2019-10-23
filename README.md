@@ -1,22 +1,16 @@
-# Synthea<sup>TM</sup> Patient Generator [![Build Status](https://travis-ci.org/synthetichealth/synthea.svg?branch=master)](https://travis-ci.org/synthetichealth/synthea) [![codecov](https://codecov.io/gh/synthetichealth/synthea/branch/master/graph/badge.svg)](https://codecov.io/gh/synthetichealth/synthea)
+# Synthea<sup>TM</sup> Patient Generator 
 
 Synthea<sup>TM</sup> is a Synthetic Patient Population Simulator. The goal is to output synthetic, realistic (but not real), patient data and associated health records in a variety of formats.
 
-Read our [wiki](https://github.com/synthetichealth/synthea/wiki) for more information.
+Read [wiki](https://github.com/synthetichealth/synthea/wiki) for more information.
 
-Currently, Synthea<sup>TM</sup> features:
-- Birth to Death Lifecycle
-- Configuration-based statistics and demographics (defaults with Massachusetts Census data)
-- Modular Rule System
-  - Drop in [Generic Modules](https://github.com/synthetichealth/synthea/wiki/Generic-Module-Framework)
-  - Custom Java rules modules for additional capabilities
-- Primary Care Encounters, Emergency Room Encounters, and Symptom-Driven Encounters
-- Conditions, Allergies, Medications, Vaccinations, Observations/Vitals, Labs, Procedures, CarePlans
-- Formats
-  - FHIR (STU3 v3.0.1, DSTU2 v1.0.2 and R4)
-  - C-CDA
-  - CSV
-- Rendering Rules and Disease Modules with Graphviz
+Original [Repo](https://github.com/synthetichealth/synthea/
+
+
+## Modifications 
+
+This is a fork of synthea, I modified (src/main/java/org/mitre/synthea/export/CSVExporter.java) 
+for generating patient data so that it can be used with [openemr] (https://www.open-emr.org/)
 
 ## Quick Start
 
@@ -25,12 +19,20 @@ Currently, Synthea<sup>TM</sup> features:
 **System Requirements:**
 Synthea<sup>TM</sup> requires Java 1.8 or above.
 
-To clone the Synthea<sup>TM</sup> repo, then build and run the test suite:
+To clone the original Synthea<sup>TM</sup> repo, then build and run the test suite:
 ```
 git clone https://github.com/synthetichealth/synthea.git
 cd synthea
 ./gradlew build check test
 ```
+
+To clone this fork of Synthea<sup>TM</sup> repo, then build and NOT run the test suite, as the tests won't pass due to some of the modifications I made:
+```
+git clone https://github.com/rick1314/synthea-openemr.git
+cd synthea-openemr
+./gradlew build -x test
+```
+
 
 ### Generate Synthetic Patients
 Generating the population one at a time...
@@ -44,8 +46,24 @@ Usage is
 ```
 run_synthea [-s seed] [-p populationSize] [-m moduleFilter] [state [city]]
 ```
+
+All Options: 
+
+[-s seed] [-cs clinicianSeed] [-p populationSize]
+[-g gender] [-a minAge-maxAge]
+[-o overflowPopulation]
+[-m moduleFileWildcardList]
+[-c localConfigFilePath]
+[-d localModulesDirPath]
+[--config* value]
+ * any setting from src/main/resources/synthea.properties
+
 For example:
 
+ - `run_synthea Utah "Salt Lake City" -p 100` 
+    
+	This will generate data for 100 alive patients and some dead ones that live in Salt Lake City 
+ 
  - `run_synthea Massachusetts`
  - `run_synthea Alaska Juneau`
  - `run_synthea -s 12345`
@@ -54,9 +72,16 @@ For example:
  - `run_synthea -s 21 -p 100 Utah "Salt Lake City"`
  - `run_synthea -m metabolic*`
 
-Some settings can be changed in `./src/main/resources/synthea.properties`.
+
+Please modify `./src/main/resources/synthea.properties` as required.
 
 Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `./output`.
+
+### For detailed poperties of patients 
+
+Please read this [answer] (https://github.com/synthetichealth/synthea/issues/310)
+
+
 
 ### Synthea<sup>TM</sup> GraphViz
 Generate graphical visualizations of Synthea<sup>TM</sup> rules and modules.
