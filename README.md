@@ -80,7 +80,8 @@ Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `.
 ### For detailed poperties of patients 
 
 Please read this [answer] (https://github.com/synthetichealth/synthea/issues/310)
-
+To add Height,Weight,BMI, etc use wellness_encounters module like: -m wellness_encounters
+To see detailed output modify synthea.properties: generate.log_patients.detail = detailed
 
 
 ### Synthea<sup>TM</sup> GraphViz
